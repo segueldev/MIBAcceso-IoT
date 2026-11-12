@@ -1,53 +1,46 @@
-# Sumativa Unidad 2 TI3042 — MIB Acceso
+# MIB Acceso
 
-**Benjamín Seguel · INACAP Temuco · 12 de noviembre de 2026**
+Trabajo individual de Benjamín Seguel para la Sumativa Unidad 2 de TI3042, INACAP Temuco.
 
-Continuación del control de acceso Arduino de Benjamín Seguel y Marcelo Ducommun. Dos Android simulan una base con sensor y cerradura y un agente que solicita acceso por Wi-Fi. Se conserva la autoría del antecedente; esta entrega de Unidad 2 es individual.
+La idea es continuar el control de acceso de la Unidad 1. El problema es que alguien puede entrar a un lugar restringido sin dejar un registro. Para esta entrega se usan dos Android: uno hace de Base y simula el sensor y la puerta; el otro hace de Agente y pide acceso por Wi-Fi.
 
-## Entrega y documentación
+## Archivos de la entrega
 
-El Word conserva la guía de INACAP y añade las respuestas dentro de cada apartado.
+- [Guía completada](docs/Informe-Sumativa-TI3042-Benjamin-Seguel.docx): es la guía de INACAP con las respuestas añadidas en cada apartado.
+- [Guía original](docs/referencias/TI3042_U2_ES_GUÍA.docx).
+- [TXT para AAI](docs/Entrega_AAI_TI3042_Benjamin_Seguel.txt).
+- [Pasos para probar la aplicación](docs/DEMO-RAPIDA.md).
+- [Resultados de las pruebas](docs/PRUEBAS-ACTUALES.json).
+- [Revisión de seguridad](docs/SEGURIDAD-REVISADA.md).
+- [Explicación corta del código](GUIA-PARA-EXPLICAR.md).
 
-- [Guía original completada con las respuestas del proyecto](docs/Informe-Sumativa-TI3042-Benjamin-Seguel.docx)
-- [Guía original de la evaluación](docs/referencias/TI3042_U2_ES_GUÍA.docx)
-- [Hallazgos y pruebas de seguridad](docs/SEGURIDAD-REVISADA.md)
+## Qué hace
 
-- [Informe técnico y correspondencia con cada criterio de la rúbrica](docs/SUMATIVA-U2.md)
-- [Instalación, demo y preguntas del docente](docs/DEMO-RAPIDA.md)
-- [Mockup de cinco pantallas](docs/MOCKUP.svg)
-- [Resultados actuales de 18 pruebas](docs/PRUEBAS-ACTUALES.json)
-- [TXT de entrega AAI](docs/Entrega_AAI_TI3042_Benjamin_Seguel.txt)
-- [Guía para explicar y modificar el código](GUIA-PARA-EXPLICAR.md)
+Tiene login, conexión entre Base y Agente, simulación de presencia, apertura por tiempo, mantenimiento y bitácora. La Base rechaza la apertura si no hay presencia o está en mantenimiento. La puerta se cierra sola al terminar el tiempo.
 
-## Funciones
+La aplicación usa Kotlin, SQLite y funciones de red y seguridad de Java y Android. La cuenta es local en cada celular. No usa Firebase ni MySQL.
 
-La aplicación Android de esta unidad está escrita en Kotlin. El archivo .ino de antecedentes es el Arduino de Unidad 1; Python y Shell se usan solo como herramientas de apoyo para pruebas o compilación.
+## Abrir el proyecto
 
-Login local, contraseña PBKDF2 con sal, bloqueo temporal, roles Base/Agente, código de vinculación protegido con Keystore, canal AES-GCM, presencia simulada, mantenimiento, apertura temporizada y cierre autónomo, bitácora y exportación CSV.
-
-Credenciales y eventos se conservan en SQLite. AlmacenSqlite migra los datos de la versión anterior desde SharedPreferences. No hay contraseñas universales ni secretos de misión incluidos en el repositorio.
-
-## Abrir en Android Studio
-
-Abrir esta carpeta raíz como proyecto. Usar Gradle JDK 21, SDK 36 y Android 8 o posterior. Ejecutar:
+Abrir esta carpeta en Android Studio. Usar Gradle JDK 21 y SDK 36. Se necesita Android 8 o superior.
 
 ```bash
 chmod +x gradlew
 ./gradlew :app:assembleDebug :app:testDebugUnitTest :app:lintDebug
 ```
 
-APK: `app/build/outputs/apk/debug/app-debug.apk`. No versionar local.properties ni claves de firma.
+La APK queda en `app/build/outputs/apk/debug/app-debug.apk`.
 
-Verificación realizada el 12 de noviembre: compilación correcta, 18 pruebas sin fallos y lintDebug completado. Lint reportó 20 advertencias no fatales. La firma de la APK se verificó con apksigner. Los ensayos son JUnit/Robolectric y sockets de prueba; no se afirma una nueva prueba en dos teléfonos físicos.
+## Prueba con dos celulares
 
-## Demo mínima
+Conectar ambos a la misma Wi-Fi. Crear una cuenta en cada uno. Iniciar la Base y copiar su IP y código de misión en el Agente. Activar presencia en Base, pedir acceso desde Agente y observar el cierre después de cuatro segundos. Mantener las dos apps abiertas.
 
-Instalar la misma APK en dos teléfonos conectados a la misma Wi-Fi privada. Crear cuenta local en cada uno. Iniciar Base en el primero; en Agente introducir la IP que muestra Base y su código de misión completo. Activar presencia en Base, solicitar cuatro segundos desde Agente y observar apertura y cierre. Repetir sin presencia y con mantenimiento para comprobar rechazos. Consultar y exportar la bitácora.
+## Seguridad y pruebas
 
-Mantener ambas apps abiertas. Para teléfonos usar la IPv4 de Base; 10.0.2.2 se reserva para emuladores con el reenvío indicado en la guía. Algunas redes aíslan clientes.
+La contraseña se guarda mediante PBKDF2 con sal. El código de misión se protege con Android Keystore y los mensajes usan AES-GCM. También se revisan los intentos fallidos y los mensajes repetidos. Los límites y las correcciones están explicados en la guía completada.
 
-## Alcance y seguridad
+La APK compiló y pasaron 18 pruebas automatizadas. Lint dejó 20 advertencias no fatales. Las pruebas usan JUnit, Robolectric y sockets dentro del computador. La demostración con dos Android físicos y la validación docente están pendientes. Es una simulación, sin Arduino ni cerradura real conectados.
 
-El prototipo simula IoT: no controla Arduino real. El canal utiliza AES-GCM de aplicación sobre TCP, no TLS. Las contraseñas se derivan; el código de misión se cifra. La bitácora está en almacenamiento privado y no es un registro inmutable ni está cifrada integralmente.
+## Otros archivos
 
-La revisión y retroalimentación docente, la demostración en clase y las pruebas con Wi-Fi física siguen pendientes. No se declara certificación ISO. El [informe](docs/SUMATIVA-U2.md) relaciona riesgos, controles y límites con la orientación de [ISO/IEC 27400:2022](https://www.iso.org/standard/44373.html) y las [recomendaciones criptográficas de Android](https://developer.android.com/privacy-and-security/cryptography).
+La app Android está escrita en Kotlin. El `.ino` de `antecedentes` es el Arduino de Unidad 1, realizado con Marcelo Ducommun. Python y Shell se usan en herramientas auxiliares para pruebas o compilación; no forman parte del código Android.
