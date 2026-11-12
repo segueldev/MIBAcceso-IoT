@@ -1,0 +1,19 @@
+<resources>
+    <style name="Theme.MIB" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">#B9F466</item>
+        <item name="colorOnPrimary">#142100</item>
+        <item name="colorSecondary">#B9F466</item>
+        <item name="colorOnSecondary">#142100</item>
+        <item name="colorSurface">#171C18</item>
+        <item name="colorOnSurface">#EFF2EA</item>
+        <item name="colorOnSurfaceVariant">#B9C2B7</item>
+        <item name="colorOutline">#63705E</item>
+        <item name="colorError">#FFB4AB</item>
+        <item name="android:windowBackground">#0C100D</item>
+        <item name="android:colorAccent">#B9F466</item>
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">#0C100D</item>
+        <item name="android:navigationBarColor">#0C100D</item>
+    </style>
+</resources>

@@ -1,0 +1,19 @@
+<resources>
+    <item name="usuario" type="id" />
+    <item name="contrasena" type="id" />
+    <item name="confirmar" type="id" />
+    <item name="ingresar" type="id" />
+    <item name="nav_monitoreo" type="id" />
+    <item name="nav_activador" type="id" />
+    <item name="nav_conexion" type="id" />
+    <item name="nav_registro" type="id" />
+    <item name="rol_base" type="id" />
+    <item name="rol_agente" type="id" />
+    <item name="direccion" type="id" />
+    <item name="codigo_mision" type="id" />
+    <item name="conectar" type="id" />
+    <item name="abrir" type="id" />
+    <item name="duracion" type="id" />
+    <item name="presencia" type="id" />
+    <item name="mantenimiento" type="id" />
+</resources>

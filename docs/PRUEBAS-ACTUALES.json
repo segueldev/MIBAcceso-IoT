@@ -1,0 +1,46 @@
+{
+  "fecha": "2026-11-12",
+  "compilacion": "BUILD SUCCESSFUL",
+  "pruebas": [
+    {
+      "name": "cl.seguel.mib.AlmacenSqliteTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-11-12T16:26:25.868Z"
+    },
+    {
+      "name": "cl.seguel.mib.CredencialesTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-11-12T16:26:37.800Z"
+    },
+    {
+      "name": "cl.seguel.mib.InicioTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-11-12T16:26:39.544Z"
+    },
+    {
+      "name": "cl.seguel.mib.CanalSeguroTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-11-12T16:26:37.644Z"
+    },
+    {
+      "name": "cl.seguel.mib.PuertaTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-11-12T16:26:46.055Z"
+    }
+  ],
+  "total": 13,
+  "alcance": "JUnit y Robolectric; canal con sockets de prueba. Sin pruebas actuales de radio Wi-Fi física ni aprobación docente.",
+  "apk_sha256": "51799411035074367ddad41576c7cb6de4ecdee1d7bd0090d67b2a78e48b59bf",
+  "lint": "lintDebug completado sin errores fatales; ver informe local",
+  "cambio": "SQLite para autenticación y bitácora; migración verificada"
+}

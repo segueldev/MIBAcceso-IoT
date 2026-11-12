@@ -1,0 +1,18 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-feature android:name="android.hardware.wifi" android:required="false" />
+    <application android:theme="@style/Theme.MIB" android:label="MIB Acceso"
+        android:icon="@drawable/ic_agencia" android:allowBackup="false"
+        android:fullBackupContent="false" android:dataExtractionRules="@xml/excluir_copias"
+        android:supportsRtl="true" android:usesCleartextTraffic="false"
+        android:networkSecurityConfig="@xml/seguridad_red">
+        <activity android:name=".MainActivity" android:exported="true"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

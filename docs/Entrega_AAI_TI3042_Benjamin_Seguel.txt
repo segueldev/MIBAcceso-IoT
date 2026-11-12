@@ -1,0 +1,15 @@
+SUMATIVA UNIDAD 2 — TI3042
+Estudiante: Benjamín Seguel
+Proyecto: Control de acceso IoT MIB
+
+Repositorio público con código Kotlin, pruebas, mockup y documentación:
+https://github.com/segueldev/MIBAcceso-IoT
+
+Continuidad de Unidad 1: trabajo Arduino de Benjamín Seguel y Marcelo Ducommun.
+Entrega individual de Unidad 2.
+
+Guía de demostración: docs/DEMO-RAPIDA.md
+Informe técnico y rúbrica: docs/SUMATIVA-U2.md
+Resultados automatizados: docs/PRUEBAS-ACTUALES.json
+
+No se declara validación docente ni pruebas nuevas en teléfonos físicos.
