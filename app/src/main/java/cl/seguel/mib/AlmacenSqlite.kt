@@ -20,7 +20,7 @@ class AlmacenSqlite(contexto: Context, nombre: String) {
             try {
                 anterior.all.forEach { (k, v) ->
                     val fila = ContentValues().apply { put("clave", k); put("valor", v.toString()) }
-                    db.insertWithOnConflict("valores", null, fila, SQLiteDatabase.CONFLICT_IGNORE)
+                    check(db.insertWithOnConflict("valores", null, fila, SQLiteDatabase.CONFLICT_IGNORE) != -1L) { "No se pudo migrar el registro local." }
                 }
                 db.setTransactionSuccessful()
             } finally { db.endTransaction() }
@@ -45,7 +45,7 @@ class AlmacenSqlite(contexto: Context, nombre: String) {
             return try {
                 cambios.forEach { (k, v) ->
                     val fila = ContentValues().apply { put("clave", k); put("valor", v) }
-                    db.insertWithOnConflict("valores", null, fila, SQLiteDatabase.CONFLICT_REPLACE)
+                    check(db.insertWithOnConflict("valores", null, fila, SQLiteDatabase.CONFLICT_REPLACE) != -1L) { "No se pudo guardar el registro local." }
                 }
                 db.setTransactionSuccessful()
                 true

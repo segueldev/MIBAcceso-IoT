@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="cl.seguel.mib.CanalSeguroTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-12T17:54:30.405Z" time="0.142">
+  <testcase name="cadaCifradoTieneUnIvDiferente" classname="cl.seguel.mib.CanalSeguroTest" time="0.082" />
+  <testcase name="rechazaSecuenciaRepetidaAunqueElCifradoSeaValido" classname="cl.seguel.mib.CanalSeguroTest" time="0.035" />
+  <testcase name="dosExtremosRealesIntercambianOrdenYConfirmacion" classname="cl.seguel.mib.CanalSeguroTest" time="0.005" />
+  <testcase name="rechazaClaveEquivocadaYTramasGigantes" classname="cl.seguel.mib.CanalSeguroTest" time="0.007" />
+  <testcase name="cifradoNoExponeDatosYDetectaAlteracion" classname="cl.seguel.mib.CanalSeguroTest" time="0.013" />
+  </testsuite>

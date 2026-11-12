@@ -7,40 +7,58 @@
       "tests": "1",
       "failures": "0",
       "errors": "0",
-      "timestamp": "2026-11-12T16:26:25.868Z"
+      "timestamp": "2026-11-12T17:54:22.618Z"
+    },
+    {
+      "name": "cl.seguel.mib.DatosSegurosTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-11-12T17:54:31.710Z"
     },
     {
       "name": "cl.seguel.mib.CredencialesTest",
       "tests": "2",
       "failures": "0",
       "errors": "0",
-      "timestamp": "2026-11-12T16:26:37.800Z"
+      "timestamp": "2026-11-12T17:54:30.567Z"
     },
     {
       "name": "cl.seguel.mib.InicioTest",
       "tests": "2",
       "failures": "0",
       "errors": "0",
-      "timestamp": "2026-11-12T16:26:39.544Z"
+      "timestamp": "2026-11-12T17:54:31.826Z"
     },
     {
       "name": "cl.seguel.mib.CanalSeguroTest",
       "tests": "5",
       "failures": "0",
       "errors": "0",
-      "timestamp": "2026-11-12T16:26:37.644Z"
+      "timestamp": "2026-11-12T17:54:30.405Z"
     },
     {
       "name": "cl.seguel.mib.PuertaTest",
       "tests": "3",
       "failures": "0",
       "errors": "0",
-      "timestamp": "2026-11-12T16:26:46.055Z"
+      "timestamp": "2026-11-12T17:54:38.966Z"
+    },
+    {
+      "name": "cl.seguel.mib.SeguridadAdversarialTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "timestamp": "2026-11-12T17:54:38.978Z"
     }
   ],
-  "total": 13,
-  "alcance": "JUnit y Robolectric; canal con sockets de prueba. Sin pruebas actuales de radio Wi-Fi física ni aprobación docente.",
-  "apk_sha256": "51799411035074367ddad41576c7cb6de4ecdee1d7bd0090d67b2a78e48b59bf",
-  "lint": "lintDebug completado sin errores fatales; ver informe local",
-  "cambio": "SQLite para autenticación y bitácora; migración verificada"
+  "total": 18,
+  "fallos": 0,
+  "errores": 0,
+  "lint": {
+    "Warning": 20
+  },
+  "alcance": "JUnit y Robolectric API 35; sockets TCP de loopback. Sin prueba actual en dos Android físicos; adb no detectó dispositivos.",
+  "cambios": "Control de fallos SQLite y neutralización de prefijos de fórmulas al exportar CSV. Pruebas adversariales adicionales.",
+  "apk_sha256": "69a3777317824e011673b84e3f8a1a7eecfb878dc8ce261f93e8ec635e004f79"
 }

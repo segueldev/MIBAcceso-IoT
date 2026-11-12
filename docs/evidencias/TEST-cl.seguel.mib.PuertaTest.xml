@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="cl.seguel.mib.PuertaTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-12T17:54:38.966Z" time="0.009">
+  <testcase name="rechazaParametrosQuePodrianDejarLaPuertaAbierta" classname="cl.seguel.mib.PuertaTest" time="0.008" />
+  <testcase name="exigePresenciaYMantenimientoDesactivado" classname="cl.seguel.mib.PuertaTest" time="0.001" />
+  <testcase name="cierraEnCuatroSegundosYUnaOrdenDuplicadaNoReabre" classname="cl.seguel.mib.PuertaTest" time="0.0" />
+  </testsuite>

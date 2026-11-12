@@ -304,7 +304,11 @@ class ModeloAgencia(aplicacion: Application) : AndroidViewModel(aplicacion) {
     }
 
     fun exportarCsv(): String {
-        fun campo(s: String) = "\"${s.replace("\"", "\"\"")}\""
+        fun campo(s: String): String {
+            // Las comillas CSV no impiden fórmulas en una hoja de cálculo.
+            val seguro = if (s.trimStart().firstOrNull() in listOf('=', '+', '-', '@') || s.firstOrNull() in listOf('\t', '\r', '\n')) "'" + s else s
+            return "\"${seguro.replace("\"", "\"\"")}\""
+        }
         return "fecha,evento,solicitud,rtt_ms\n" + eventos.reversed().joinToString("\n") { e ->
             listOf(e.fecha, e.detalle, e.solicitud, e.rtt?.toString() ?: "").joinToString(",", transform = ::campo)
         }

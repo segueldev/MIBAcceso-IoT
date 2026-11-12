@@ -6,10 +6,14 @@ Continuación del control de acceso Arduino de Benjamín Seguel y Marcelo Ducomm
 
 ## Entrega y documentación
 
+- [Informe Word con código y revisión de seguridad](docs/Informe-Sumativa-TI3042-Benjamin-Seguel.docx)
+- [Guía original de la evaluación](docs/referencias/TI3042_U2_ES_GUÍA.docx)
+- [Hallazgos y pruebas de seguridad](docs/SEGURIDAD-REVISADA.md)
+
 - [Informe técnico y correspondencia con cada criterio de la rúbrica](docs/SUMATIVA-U2.md)
 - [Instalación, demo y preguntas del docente](docs/DEMO-RAPIDA.md)
 - [Mockup de cinco pantallas](docs/MOCKUP.svg)
-- [Resultados actuales de 13 pruebas](docs/PRUEBAS-ACTUALES.json)
+- [Resultados actuales de 18 pruebas](docs/PRUEBAS-ACTUALES.json)
 - [TXT de entrega AAI](docs/Entrega_AAI_TI3042_Benjamin_Seguel.txt)
 - [Guía para explicar y modificar el código](GUIA-PARA-EXPLICAR.md)
 
@@ -30,7 +34,7 @@ chmod +x gradlew
 
 APK: `app/build/outputs/apk/debug/app-debug.apk`. No versionar local.properties ni claves de firma.
 
-Verificación realizada el 12 de noviembre: compilación correcta, 13 pruebas sin fallos y lintDebug completado. Lint reportó 20 advertencias no fatales. La firma de la APK se verificó con apksigner. Los ensayos son JUnit/Robolectric y sockets de prueba; no se afirma una nueva prueba en dos teléfonos físicos.
+Verificación realizada el 12 de noviembre: compilación correcta, 18 pruebas sin fallos y lintDebug completado. Lint reportó 20 advertencias no fatales. La firma de la APK se verificó con apksigner. Los ensayos son JUnit/Robolectric y sockets de prueba; no se afirma una nueva prueba en dos teléfonos físicos.
 
 ## Demo mínima
 

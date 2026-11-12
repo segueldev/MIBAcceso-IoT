@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="cl.seguel.mib.InicioTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-11-12T17:54:31.826Z" time="7.136">
+  <testcase name="ajustesDeDuracionLleganAlControlAlModeloYALaPuerta" classname="cl.seguel.mib.InicioTest" time="6.681" />
+  <testcase name="iniciaConFormularioDeCredencialSinAccesoAlPanel" classname="cl.seguel.mib.InicioTest" time="0.455" />
+  </testsuite>

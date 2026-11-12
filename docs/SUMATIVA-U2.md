@@ -69,3 +69,8 @@ Guía Sumativa TI3042 U2 y antecedentes Arduino entregados por el estudiante.
 - ISO: https://www.iso.org/standard/44373.html
 - Android Developers, criptografía: https://developer.android.com/privacy-and-security/cryptography
 - Android Keystore: https://developer.android.com/privacy-and-security/keystore
+
+
+## Informe Word y revisión final
+
+El informe formal con extractos de código está en Informe-Sumativa-TI3042-Benjamin-Seguel.docx. La revisión final de seguridad y las correcciones están en SEGURIDAD-REVISADA.md. Resultado actualizado: 18 pruebas sin fallos; ver PRUEBAS-ACTUALES.json.

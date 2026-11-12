@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="cl.seguel.mib.SeguridadAdversarialTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-12T17:54:38.978Z" time="0.023">
+  <testcase name="sesionAjenaSeRechazaInclusoConClaveCorrecta" classname="cl.seguel.mib.SeguridadAdversarialTest" time="0.015" />
+  <testcase name="codigoIncorrectoNoCompletaElSaludo" classname="cl.seguel.mib.SeguridadAdversarialTest" time="0.005" />
+  <testcase name="tramaTruncadaONegativaSeRechaza" classname="cl.seguel.mib.SeguridadAdversarialTest" time="0.002" />
+  </testsuite>

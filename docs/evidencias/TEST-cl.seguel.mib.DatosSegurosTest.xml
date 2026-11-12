@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="cl.seguel.mib.DatosSegurosTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-11-12T17:54:31.710Z" time="0.108">
+  <testcase name="exportacionNeutralizaFormulasYEscapaComillas" classname="cl.seguel.mib.DatosSegurosTest" time="0.071" />
+  <testcase name="consultasParametrizadasNoInterpretanSqlEnLasClaves" classname="cl.seguel.mib.DatosSegurosTest" time="0.036" />
+  </testsuite>

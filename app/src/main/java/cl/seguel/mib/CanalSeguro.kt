@@ -33,7 +33,7 @@ object Seguridad {
         return Base64.getUrlDecoder().decode(codigo).also { require(it.size == 32) }
     }
     fun derivar(contrasena: CharArray, sal: ByteArray): ByteArray {
-        // Derivamos la contrasena con PBKDF2 para guardarla segura en SharedPreferences
+        // Derivamos la contrasena con PBKDF2 para guardarla en SQLite sin almacenar el texto original
         val spec = PBEKeySpec(contrasena, sal, 210_000, 256)
         return try { SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256").generateSecret(spec).encoded }
         finally { spec.clearPassword() }
