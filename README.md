@@ -6,7 +6,9 @@ Continuación del control de acceso Arduino de Benjamín Seguel y Marcelo Ducomm
 
 ## Entrega y documentación
 
-- [Informe Word con código y revisión de seguridad](docs/Informe-Sumativa-TI3042-Benjamin-Seguel.docx)
+El Word conserva la guía de INACAP y añade las respuestas dentro de cada apartado.
+
+- [Guía original completada con las respuestas del proyecto](docs/Informe-Sumativa-TI3042-Benjamin-Seguel.docx)
 - [Guía original de la evaluación](docs/referencias/TI3042_U2_ES_GUÍA.docx)
 - [Hallazgos y pruebas de seguridad](docs/SEGURIDAD-REVISADA.md)
 
@@ -18,6 +20,8 @@ Continuación del control de acceso Arduino de Benjamín Seguel y Marcelo Ducomm
 - [Guía para explicar y modificar el código](GUIA-PARA-EXPLICAR.md)
 
 ## Funciones
+
+La aplicación Android de esta unidad está escrita en Kotlin. El archivo .ino de antecedentes es el Arduino de Unidad 1; Python y Shell se usan solo como herramientas de apoyo para pruebas o compilación.
 
 Login local, contraseña PBKDF2 con sal, bloqueo temporal, roles Base/Agente, código de vinculación protegido con Keystore, canal AES-GCM, presencia simulada, mantenimiento, apertura temporizada y cierre autónomo, bitácora y exportación CSV.
 
