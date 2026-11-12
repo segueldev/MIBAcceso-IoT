@@ -73,4 +73,4 @@ Guía Sumativa TI3042 U2 y antecedentes Arduino entregados por el estudiante.
 
 ## Informe Word y revisión final
 
-El informe formal con extractos de código está en Informe-Sumativa-TI3042-Benjamin-Seguel.docx. La revisión final de seguridad y las correcciones están en SEGURIDAD-REVISADA.md. Resultado actualizado: 18 pruebas sin fallos; ver PRUEBAS-ACTUALES.json.
+La guía original completada con las respuestas y ejemplos de código está en Informe-Sumativa-TI3042-Benjamin-Seguel.docx. Conserva el diseño y contenido de la guía del docente. La revisión final de seguridad y las correcciones están en SEGURIDAD-REVISADA.md. Resultado actualizado: 18 pruebas sin fallos; ver PRUEBAS-ACTUALES.json.
