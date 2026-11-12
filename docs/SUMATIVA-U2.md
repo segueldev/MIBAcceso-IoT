@@ -1,76 +1,56 @@
-# Control de acceso con auditoría mediante dos dispositivos Android
+# Desarrollo de la Sumativa Unidad 2
 
-Sumativa Unidad 2 · TI3042 · Benjamín Seguel · INACAP Temuco
+Benjamín Seguel · TI3042 · INACAP Temuco
 
-## Problema y continuidad
+El documento principal es [la guía completada](Informe-Sumativa-TI3042-Benjamin-Seguel.docx). Conserva la portada, las instrucciones y el diseño original. Las respuestas se añadieron debajo de cada apartado. El código completo está en este repositorio.
 
-El problema es el ingreso no autorizado a áreas restringidas sin una bitácora consultable. El antecedente de Unidad 1 pertenece a Benjamín Seguel y Marcelo Ducommun: Arduino, detector de presencia, teclado, LCD y servomotor. El Word inicial describe PIR; el informe técnico posterior describe sensor ultrasónico y Bluetooth HC-05. Se conserva el objetivo común de detectar presencia, validar acceso, actuar y registrar. En esta unidad el sensor se simula como una señal booleana PIR: no se afirma medir distancias ni controlar hardware Arduino real.
+## Problema
 
-La guía permite usar dos Android para simular control y monitoreo IoT. Una misma APK ofrece Base y Agente. La base simula sensor, cerradura y mantenimiento; el agente solicita acceso y recibe confirmaciones. Los sectores son destinos de una misma puerta simulada.
+Se continúa el control de acceso de la Unidad 1: impedir entradas no autorizadas y dejar un registro. En esta entrega dos Android simulan el sensor y la puerta. La Base valida y el Agente solicita. El antecedente Arduino se realizó con Marcelo Ducommun; la entrega actual es individual.
 
-## Funcionalidades y herramientas
+## Herramientas
 
-Alta de cuenta local sin contraseña universal, login, bloqueo tras tres fallos, cierre de sesión, roles Base y Agente, vinculación mediante código de misión, telemetría, apertura entre 1 y 10 segundos, cierre autónomo, rechazo sin presencia o durante mantenimiento, consulta de eventos y exportación CSV.
+Android Studio, Kotlin, SQLite y controles Material. La conexión usa Socket y ServerSocket. Para la seguridad se usan funciones de Java y Android: PBKDF2, Cipher y Keystore. La app no tiene un backend en nube.
 
-Android Studio y Kotlin permiten producir una APK nativa. La interfaz usa Material Components; AndroidViewModel conserva estado ante recreaciones de pantalla. Los sockets operan fuera del hilo de interfaz. SQLite funciona sin internet y evita credenciales de un servicio externo. La clase AlmacenSqlite almacena pares clave/valor en una tabla local y migra los datos anteriores de SharedPreferences: usuario, sal, verificador, bloqueo, código cifrado y un registro JSON de hasta 100 eventos. No se utiliza Firebase ni MySQL. El agente consulta el estado remoto mediante mensajes del protocolo y registra localmente lo recibido. No hay una base central compartida entre ambos equipos.
+## Comunicación
 
-## Comunicación inalámbrica
+Se eligió Wi-Fi para conectar dos equipos en una misma red. La distancia depende del router y las paredes, por lo que debe comprobarse en aula. Wi-Fi puede consumir más que Bluetooth de bajo consumo. TCP mantiene el orden de los datos, pero la app también necesita respuestas y tiempos de espera.
 
-Se selecciona TCP sobre Wi-Fi de una misma red privada porque permite comunicación bidireccional entre dos teléfonos sin un broker. El alcance depende del punto de acceso, muros e interferencia; debe validarse en aula y no se declara una distancia medida. Wi-Fi consume más que BLE, por lo que la demo mantiene sesiones cortas y las apps abiertas. Bluetooth reduce infraestructura, pero añade emparejamiento y permisos; MQTT es un protocolo de mensajería sobre una red, no una radio alternativa, y requeriría un broker. TCP conserva el orden, pero la app igualmente valida confirmaciones, secuencias, tiempos de espera y reconexión. Algunas redes de invitados impiden comunicación entre clientes.
+Bluetooth sería otra alternativa con emparejamiento y permisos. MQTT funciona sobre una red y requiere un broker. Para esta práctica se mantuvo la conexión directa por TCP.
 
-## Diseño de interfaz y navegación
+## Seguridad
 
-El mockup está en `MOCKUP.svg`. Login permite crear e ingresar una credencial y muestra errores o bloqueo. Tras autenticarse se navega entre Monitoreo, Conexión, Activador y Bitácora. Conexión selecciona rol y configura dirección/código; Monitoreo muestra enlace y estado de puerta; Activador muestra sensor y mantenimiento en Base y solicitud/duración en Agente. Bitácora presenta fecha, evento e identificador y permite exportar. El estado sin conexión no debe interpretarse como apertura confirmada. El mockup es un esquema de diseño, no una captura ni validación docente.
+El login usa una cuenta local y PBKDF2 con sal. Tres fallos producen un bloqueo de 60 segundos. El código de misión se guarda cifrado con una clave de Android Keystore. Los mensajes se cifran con AES-GCM y se revisan la sesión y la secuencia.
 
-## Seguridad y relación con ISO IEC 27400
+La Base no acepta aperturas sin presencia, con mantenimiento, con valores fuera de rango o repitiendo una orden ya procesada. Solo se declaran INTERNET y ACCESS_NETWORK_STATE. No se escanean redes ni se usa Bluetooth.
 
-ISO/IEC 27400:2022 entrega orientación de riesgos y controles de seguridad y privacidad IoT. Este mapeo es una decisión de diseño del prototipo, no una certificación ni una auditoría de conformidad.
+La revisión encontró dos puntos que se corrigieron: los prefijos de fórmula al exportar CSV y la comprobación de errores al escribir en SQLite. El detalle está en [SEGURIDAD-REVISADA.md](SEGURIDAD-REVISADA.md).
 
-| Riesgo | Control implementado | Evidencia que mostrar |
-| --- | --- | --- |
-| Robo de contraseña almacenada | PBKDF2-HMAC-SHA256, sal aleatoria y 210.000 iteraciones; no se guarda la contraseña | Credenciales.kt y CanalSeguro.kt |
-| Intentos repetidos | Bloqueo persistente de 60 segundos tras tres fallos | Login y pruebas de credenciales |
-| Lectura o alteración de órdenes | AES-256-GCM con IV aleatorio y etiqueta de integridad | Pruebas de alteración y clave incorrecta |
-| Repetición de mensajes | Desafío de sesión y secuencias estrictas | CanalSeguroTest |
-| Exposición del secreto de vinculación | Código aleatorio de 256 bits cifrado mediante Android Keystore en Base | Credenciales.kt |
-| Apertura indebida | Base valida presencia, mantenimiento, sector, duración e ID duplicado | PuertaTest |
-| Pérdida de enlace | Cierre temporizado local y ausencia de reenvío automático de aperturas | Demo con desconexión |
-| Filtración de auditoría | Datos en espacio privado, sin contraseñas en eventos; exportación elegida por usuario; copias excluidas | Manifest y exportarCsv |
+La app es de laboratorio. La bitácora no es inmutable ni se cifra completa. Quien consiga el código puede conectarse. El canal no es TLS y no se afirma una certificación ISO. La guía completada explica estas limitaciones.
 
-El hash de contraseña no equivale a cifrado reversible. El código de misión sí se cifra; el canal usa cifrado autenticado de aplicación sobre TCP, no TLS. `usesCleartextTraffic=false` no protege por sí solo sockets: AES-GCM lo hace en CanalSeguro. Los permisos INTERNET y ACCESS_NETWORK_STATE permiten red y consulta de conectividad sin permisos peligrosos de ubicación o Bluetooth porque no hay escaneo de redes ni uso de Bluetooth.
+## Pruebas
 
-Limitaciones: la cuenta es local, poseer el código habilita la vinculación y no identifica a un agente mediante servidor central; la bitácora no es inmutable ni está cifrada integralmente; un dispositivo comprometido puede alterar datos; el bloqueo depende del reloj; el canal académico requiere revisión independiente. La base debe permanecer abierta y no controla un actuador real. Se debe validar con el docente si requiere específicamente TLS como evolución.
+La compilación terminó correctamente y pasaron 18 pruebas con JUnit y Robolectric. Se revisaron login, bloqueo, mensajes alterados, repetición, código incorrecto, tamaño de tramas, almacenamiento y reglas de apertura. Lint dejó 20 advertencias no fatales.
 
-## Verificación y criterios
+Las pruebas de comunicación usan sockets dentro del computador. No se registró una prueba actual con dos radios Wi-Fi. La demostración y validación docente están pendientes. Ver [los resultados](PRUEBAS-ACTUALES.json) y los XML en [evidencias](evidencias).
 
-Los resultados nuevos se publican en `docs/PRUEBAS-ACTUALES.json`. Las capturas y JSON incluidos en el ZIP recibido corresponden a antecedentes de una versión previa: no acreditan pruebas nuevas de esta entrega ni del cambio SQLite. No se afirma haber probado hoy en dos teléfonos reales.
+## Relación con la rúbrica
 
-| Criterios | Evidencia preparada |
+| Criterio | Dónde se desarrolla |
 | --- | --- |
-| 2.1.1.1 y 2.1.1.2 | Problema, componentes y funcionalidades anteriores |
-| 2.1.1.3 | Herramientas, arquitectura y SQLite |
-| 2.1.1.4 | Propuesta lista para presentar; retroalimentación docente pendiente |
-| 2.1.2.5 | Comparación Wi-Fi, Bluetooth y MQTT |
-| 2.1.2.6 | Mockup y navegación |
-| 2.1.2.7 | Diseño y autenticación listos para revisión; validación pendiente |
-| 2.1.3.8 y 2.1.3.9 | Proyecto Kotlin, APK y Manifest |
-| 2.1.3.10 y 2.1.4.14 | Controles y límites de seguridad |
-| 2.1.3.11 | Pruebas actuales automatizadas y plan manual |
-| 2.1.4.12 | Demo de dos Android pendiente de ejecución en clase |
-| 2.1.4.13 | Guion y decisiones técnicas |
-| 2.1.4.15 | Preguntas y ajustes con docente pendientes |
+| 2.1.1.1 y 2.1.1.2 | Paso 1 de la guía: problema, equipos y funciones. |
+| 2.1.1.3 | Paso 1: herramientas y archivos del proyecto. |
+| 2.1.1.4 | Paso 1: propuesta para el docente; validación pendiente. |
+| 2.1.2.5 | Paso 2: selección de Wi-Fi y comparación. |
+| 2.1.2.6 | Paso 2: pantallas, navegación y mockup. |
+| 2.1.2.7 | Paso 2: revisión de UI y login pendiente. |
+| 2.1.3.8 | Proyecto Kotlin y APK compilada. |
+| 2.1.3.9 | Paso 3 y AndroidManifest.xml. |
+| 2.1.3.10 | Paso 3: medidas de seguridad y límites. |
+| 2.1.3.11 | Paso 3: pruebas y correcciones comprobadas. |
+| 2.1.4.12 | Paso 4: secuencia de demostración preparada. |
+| 2.1.4.13 | Explicaciones y ejemplos de código de la guía. |
+| 2.1.4.14 | Paso 3, pruebas y revisión de seguridad. |
+| 2.1.4.15 | Paso 4: preguntas y ajustes pendientes del docente. |
 
-No se asigna un puntaje anticipado: corresponde al docente verificar las evidencias y la demostración.
-
-## Fuentes
-
-Guía Sumativa TI3042 U2 y antecedentes Arduino entregados por el estudiante.
-
-- ISO: https://www.iso.org/standard/44373.html
-- Android Developers, criptografía: https://developer.android.com/privacy-and-security/cryptography
-- Android Keystore: https://developer.android.com/privacy-and-security/keystore
-
-
-## Informe Word y revisión final
-
-La guía original completada con las respuestas y ejemplos de código está en Informe-Sumativa-TI3042-Benjamin-Seguel.docx. Conserva el diseño y contenido de la guía del docente. La revisión final de seguridad y las correcciones están en SEGURIDAD-REVISADA.md. Resultado actualizado: 18 pruebas sin fallos; ver PRUEBAS-ACTUALES.json.
+La tabla ubica el contenido; no asigna puntos ni reemplaza la demostración.
